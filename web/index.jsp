@@ -8,6 +8,6 @@
 <!DOCTYPE html>
 <html>
     <%
-    response.sendRedirect("site/index.html");
+    response.sendRedirect("attendance.jsp");
     %>
 </html>

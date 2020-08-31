@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>RST</title>
+        <title>Store</title>
         <meta name="description" content="">
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,10 +54,10 @@
                                 <a href="index.html"
                                    class="navbar-brand d-none d-sm-inline-block">
                                     <div class="brand-text d-none d-lg-inline-block">
-                                        <span>RST </span><strong> MAINTENANCE PRIVATE LIMITED</strong>
+                                        <span>Arunonanda </span><strong> Supermarket</strong>
                                     </div>
                                     <div class="brand-text d-none d-sm-inline-block d-lg-none">
-                                        <strong>BD</strong>
+                                        <strong>AS</strong>
                                     </div>
                                 </a>
                                 <!-- Toggle Button-->
@@ -67,7 +67,7 @@
                             <ul
                                 class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
 
-                                <li class="nav-item"><a href="login.jsp"
+                                <li class="nav-item"><a href="logout.jsp"
                                                         class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i
                                             class="fa fa-sign-out"></i></a></li>
                             </ul>
@@ -192,57 +192,60 @@
                     <section class="forms">
                         <div class="container-fluid">
                             <div class="row">
-
-                                <!-- Horizontal Form-->
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
-                                            <h3 class="h4">Chemical Item Registration</h3>
+                                            <h3 class="h4">attedance</h3>
                                         </div>
                                         <div class="card-body">
                                             <form class="form-horizontal">
                                                 <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">attendance id</label>
                                                     <div class="col-sm-9">
-                                                        <input id="item_code" type="hidden" value="0"
-                                                               class="form-control form-control-success">
+                                                        <input id="attendance_id" type="text"	placeholder="attendance id" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Description</label>
+                                                    <label class="col-sm-3 form-control-label">month</label>
                                                     <div class="col-sm-9">
-                                                        <input id="description" type="text"
-                                                               placeholder="Description"
-                                                               class="form-control form-control-warning">
+                                                        <input id="month" type="text"	placeholder="month" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Status</label>
+                                                    <label class="col-sm-3 form-control-label">no of days</label>
                                                     <div class="col-sm-9">
-                                                        <input id="status" type="text" placeholder="Status"
-                                                               class="form-control form-control-warning">
+                                                        <input id="no_of_days" type="text"	placeholder="no of days" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Date</label>
+                                                    <label class="col-sm-3 form-control-label">no of ot</label>
                                                     <div class="col-sm-9">
-                                                        <input id="date_time" type="date"
-                                                               class="form-control form-control-warning">
+                                                        <input id="no_of_ot" type="text"	placeholder="no of ot" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">User ID</label>
+                                                    <label class="col-sm-3 form-control-label">bonus</label>
                                                     <div class="col-sm-9">
-                                                        <input id="che_ite_reg_fk_user_id" type="number"
-                                                               class="form-control form-control-warning">
+                                                        <input id="bonus" type="text"	placeholder="bonus" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">advance</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="advance" type="text"	placeholder="advance" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">date time</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="date_time" type="text"	placeholder="date time" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-9 offset-sm-3">
-                                                        <input onclick="save()" type="button" value="Save"
-                                                               class="btn btn-primary"> <input type="reset"
-                                                               value="Reset" class="btn btn-primary">
+                                                        <input onclick="save()" type="button" value="Save" class="btn btn-primary">
+                                                        <input type="reset" value="Reset" class="btn btn-primary">
                                                     </div>
-                                                    <div class="col-sm-9 offset-sm-3"></div>
                                                 </div>
                                             </form>
                                         </div>
@@ -260,12 +263,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Item Code</th>
-                                                            <th>Description</th>
-                                                            <th>Status</th>
-                                                            <th>Date</th>
-                                                            <th>Date</th>
-                                                            <th>Date</th>
+                                                            <th>attendance id</th>
+                                                            <th>month</th>
+                                                            <th>no of days</th>
+                                                            <th>no of ot</th>
+                                                            <th>bonus</th>
+                                                            <th>advance</th>
+                                                            <th>date time</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -273,40 +277,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <div class="input-group mb-3">
-                                                <input id="searchID" type="Number" class="form-control"
-                                                       placeholder="Search by ID" aria-describedby="basic-addon2">
-                                                <div class="input-group-append">
-                                                    <button onclick="search()" class="btn btn-outline-secondary"
-                                                            type="button">Search</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover" id="idTable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Item Code</th>
-                                                            <th>Description</th>
-                                                            <th>Status</th>
-                                                            <th>Date</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
                     </section>
@@ -315,11 +285,11 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <p>RST Maintenance private limited &copy; 2017-2020</p>
+                                    <p>SLIIT &copy; 2017-2020</p>
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <p>
-                                        Design by <a href="https://rstmaintenance.lk" class="external">RST</a>
+                                        Design by <a href="#" class="external">SLIIT</a>
                                     </p>
                                     <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
                                 </div>
@@ -347,6 +317,6 @@
         <script src="ajax/ajax.js"></script>
         <script src="sweetalert/sw.js"></script>
         <script src="ajax/jquery.3.2.1.min.js"></script>
-        <script src="rest/Chemical_item_registration.js"></script>
+        <script src="ajax/AttedanceJS.js" type="text/javascript"></script>
     </body>
 </html>
