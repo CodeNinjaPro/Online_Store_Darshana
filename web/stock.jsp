@@ -94,15 +94,15 @@
 
                         <li><a href="invoice.jsp"><i class="fa fa-file-text-o"></i>Invoice</a></li>
                         <li><a href="customer.jsp"><i class="fa fa-user-o"></i>Customer</a></li>
-                        <li><a href="stock.jsp"><i class="fa fa-cubes"></i>Stock</a></li>
+                        <li class="active"><a href="stock.jsp"><i class="fa fa-cubes"></i>Stock</a></li>
                         <li><a href="grn.jsp"><i class="fa fa-file-text"></i>GRN</a></li>
                         <li><a href="supplier.jsp"><i class="fa fa-users"></i>Supplier</a></li>
                         <li><a href="delivery.jsp"><i class="fa fa-cab"></i>Delivery</a></li>
-                        <li class="active"><a href="#employeetab" aria-expanded="false"
-                                              data-toggle="collapse"> <i class="fa fa-user-circle-o"></i>Employee Management
+                        <li><a href="#employeetab" aria-expanded="false"
+                               data-toggle="collapse"> <i class="fa fa-user-circle-o"></i>Employee Management
                             </a>
-                            <ul id="employeetab" class="collapse list-unstyled show ">
-                                <li class="active"><a href="attendance.jsp">Attendance</a></li>
+                            <ul id="employeetab" class="collapse list-unstyled ">
+                                <li><a href="attendance.jsp">Attendance</a></li>
                                 <li><a href="employee.jsp">Employee</a></li>
                             </ul></li>
 
@@ -133,64 +133,43 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
-                                            <h3 class="h4">attedance</h3>
+                                            <h3 class="h4">stock</h3>
                                         </div>
                                         <div class="card-body">
                                             <form class="form-horizontal">
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
-                                                        <input id="attendance_id" type="hidden"	value="0" class="form-control form-control-warning">
+                                                        <input id="stock_id" type="hidden"	value="0" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Employee</label>
+                                                    <label class="col-sm-3 form-control-label">Name</label>
                                                     <div class="col-sm-9">
-                                                        <select id="employee_id" class="form-control form-control-warning">
-                                                            
-                                                        </select>
+                                                        <input id="name" type="text"	placeholder="name" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Month</label>
+                                                    <label class="col-sm-3 form-control-label">Description</label>
                                                     <div class="col-sm-9">
-                                                        <select id="month" class="form-control form-control-warning">
-                                                            <option>January</option>
-                                                            <option>February</option>
-                                                            <option>March</option>
-                                                            <option>April</option>
-                                                            <option>May</option>
-                                                            <option>June</option>
-                                                            <option>July</option>
-                                                            <option>August</option>
-                                                            <option>September</option>
-                                                            <option>October</option>
-                                                            <option>November</option>
-                                                            <option>December</option>
-                                                        </select>
+                                                        <input id="description" type="text"	placeholder="description" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">No of Days</label>
+                                                    <label class="col-sm-3 form-control-label">Category</label>
                                                     <div class="col-sm-9">
-                                                        <input id="no_of_days" type="number"	placeholder="no of days" class="form-control form-control-warning">
+                                                        <input id="category" type="text"	placeholder="category" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Over Time Hours</label>
+                                                    <label class="col-sm-3 form-control-label">Quantity</label>
                                                     <div class="col-sm-9">
-                                                        <input id="no_of_ot" type="number"	placeholder="no of ot" class="form-control form-control-warning">
+                                                        <input id="qty" type="text"	placeholder="qty" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Bonus</label>
+                                                    <label class="col-sm-3 form-control-label">Unit Price</label>
                                                     <div class="col-sm-9">
-                                                        <input id="bonus" type="number"	placeholder="bonus" class="form-control form-control-warning">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Advance</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="advance" type="number"	placeholder="advance" class="form-control form-control-warning">
+                                                        <input id="unit_price" type="text"	placeholder="unit price" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -203,6 +182,7 @@
                                                         <input onclick="save()" type="button" value="Save" class="btn btn-primary">
                                                         <input onclick="update()" type="button" value="Update" class="btn btn-primary">
                                                         <input onclick="delet()" type="button" value="Delete" class="btn btn-primary">
+                                                        <input onclick="#" type="button" value="Report" class="btn btn-primary">
                                                         <input type="reset" value="Reset" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -222,13 +202,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>attendance id</th>
-                                                            <th>Employee id</th>
-                                                            <th>month</th>
-                                                            <th>no of days</th>
-                                                            <th>no of ot</th>
-                                                            <th>bonus</th>
-                                                            <th>advance</th>
+                                                            <th>stock id</th>
+                                                            <th>name</th>
+                                                            <th>description</th>
+                                                            <th>category</th>
+                                                            <th>qty</th>
+                                                            <th>unit price</th>
                                                             <th>date time</th>
                                                         </tr>
                                                     </thead>
@@ -277,6 +256,6 @@
         <script src="ajax/ajax.js"></script>
         <script src="sweetalert/sw.js"></script>
         <script src="ajax/jquery.3.2.1.min.js"></script>
-        <script src="ajax/AttedanceJS.js" type="text/javascript"></script>
+        <script src="ajax/StockJS.js" type="text/javascript"></script>
     </body>
 </html>

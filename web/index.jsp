@@ -8,6 +8,6 @@
 <!DOCTYPE html>
 <html>
     <%
-    response.sendRedirect("attendance.jsp");
+    response.sendRedirect("login.jsp");
     %>
 </html>
