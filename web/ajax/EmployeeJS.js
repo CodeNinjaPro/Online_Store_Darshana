@@ -31,6 +31,8 @@ function save() {
     var action = "insert";
     if (employee_id === "" || name === "" || address === "" || designation === "" || contact === "" || email === "" || basic_salary === "" || ot_rate === "" || date_time === "") {
         alert("Please Enter All Details")
+    } else if (contactValidation() || ValidateEmail()) {
+
     } else {
         $.ajax({
             url: 'EmployeeServlet',
@@ -64,6 +66,8 @@ function update() {
         alert("Please Select to Update")
     } else if (employee_id === "" || name === "" || address === "" || designation === "" || contact === "" || email === "" || basic_salary === "" || ot_rate === "" || date_time === "") {
         alert("Please Enter All Details")
+    } else if (contactValidation() || ValidateEmail()) {
+
     } else {
         $.ajax({
             url: 'EmployeeServlet',
@@ -160,4 +164,28 @@ function load() {
         }
     });
     document.getElementById("form").reset();
+}
+
+function ValidateEmail() {
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#email').val()))
+    {
+        return false;
+    }
+    alert("Invalid Email Address")
+    document.getElementById("email").select();
+    return true;
+
+}
+
+//contact number validation
+function contactValidation() {
+    var contactNo = $('#contact').val();
+    if (contactNo.length === 10) {
+        return false;
+    } else {
+        alert("Invalid Contact Number!");
+        document.getElementById("contact").select();
+        return true;
+    }
 }

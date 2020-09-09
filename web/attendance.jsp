@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+            if (session.getAttribute("userfullname") == null) {
+                response.sendRedirect("login.jsp");
+            }
+        %>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Store</title>
@@ -84,8 +89,8 @@
                             <img src="img/user.png" alt="..." class="img-fluid rounded-circle">
                         </div>
                         <div class="title">
-                            <h1 class="h4">Roshan Withanage</h1>
-                            <p>Developer</p>
+                            <h1 class="h4">${userfullname}</h1>
+                            <p>${usertype}</p>
                         </div>
                     </div>
                     <!-- Sidebar Navidation Menus-->
@@ -146,7 +151,7 @@
                                                     <label class="col-sm-3 form-control-label">Employee</label>
                                                     <div class="col-sm-9">
                                                         <select id="employee_id" class="form-control form-control-warning">
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,8 +45,15 @@ public class LoginServlet extends HttpServlet {
             User user = LoginController.getInstance().Login(username, password);
 
             if (user.getUser_id() > 0) {
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("userid", user.getUser_id());
+                session.setAttribute("userfullname", user.getFull_name());
+                session.setAttribute("usertype", user.getUser_type());
+                user.setUser_id(0);
                 response.getWriter().println(1);
             } else {
+                user.setUser_id(0);
                 response.getWriter().println(0);
             }
 

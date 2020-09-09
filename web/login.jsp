@@ -44,17 +44,14 @@
                         <div class="col-lg-6 bg-white">
                             <div class="form d-flex align-items-center">
                                 <div class="content">
-                                    <form class="form-validate" method="POST">
+                                    <form>
                                         <div class="form-group">
-                                            <input id="username" type="text" name="username" required data-msg="Please enter your username" class="input-material"autocomplete="off">
-                                            <label for="login-username" class="label-material">User Name</label>
+                                            <input id="username" type="text" placeholder="Username" class="form-control form-control-warning" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <input id="password" type="password" name="password" required data-msg="Please enter your password" class="input-material">
-                                            <label for="password" class="label-material">Password</label>
+                                            <input id="password" type="password" placeholder="Password" class="form-control form-control-warning">
                                         </div>
                                         <button class="btn btn-primary" onclick="login()">Login</button>
-                                        <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.jsp" class="signup">Signup</a>
                                 </div>
                             </div>
@@ -68,15 +65,11 @@
                 </p>
             </div>
         </div>
-        <!-- JavaScript files-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/popper.js/umd/popper.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendor/jquery.cookie/jquery.cookie.js"></script>
-        <script src="vendor/chart.js/Chart.min.js"></script>
-        <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
         <!-- Main File-->
         <script src="js/front.js"></script>
+        <script src="ajax/ajax.js" type="text/javascript"></script>
+        <script src="ajax/jquery.3.2.1.min.js" type="text/javascript"></script>
         <script src="ajax/LoginJS.js"></script>
     </body>
 </html>

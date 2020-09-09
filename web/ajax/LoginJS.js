@@ -7,10 +7,13 @@ function login() {
         method: 'POST',
         data: {username: username, password: password},
         success: function (resultText) {
-            if (resultText == 1) {
-                location.replace("attendance.jsp");
+            var rs = parseInt(resultText);
+            if (rs === 1) {
+                location.replace("customer.jsp");
             } else {
                 alert("Username or Password Incorrect");
+                document.getElementById(password).focus();
+                alert("d");
             }
 
         },
