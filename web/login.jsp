@@ -44,14 +44,14 @@
                         <div class="col-lg-6 bg-white">
                             <div class="form d-flex align-items-center">
                                 <div class="content">
-                                    <form>
+                                    <form action="LoginServlet" method="POST">
                                         <div class="form-group">
-                                            <input id="username" type="text" placeholder="Username" class="form-control form-control-warning" autocomplete="off">
+                                            <input id="username" name="username" type="text" placeholder="Username" class="form-control form-control-warning" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <input id="password" type="password" placeholder="Password" class="form-control form-control-warning">
+                                            <input id="password" name="password" type="password" placeholder="Password" class="form-control form-control-warning">
                                         </div>
-                                        <button class="btn btn-primary" onclick="login()">Login</button>
+                                        <button class="btn btn-primary" type="submit">Login</button>
                                     </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.jsp" class="signup">Signup</a>
                                 </div>
                             </div>

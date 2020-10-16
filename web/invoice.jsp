@@ -99,6 +99,7 @@
 
                         <li class="active"><a href="invoice.jsp"><i class="fa fa-file-text-o"></i>Invoice</a></li>
                         <li><a href="customer.jsp"><i class="fa fa-user-o"></i>Customer</a></li>
+                        <li><a href="item.jsp"><i class="fa fa-cube"></i>Item</a></li>
                         <li><a href="stock.jsp"><i class="fa fa-cubes"></i>Stock</a></li>
                         <li><a href="grn.jsp"><i class="fa fa-file-text"></i>GRN</a></li>
                         <li><a href="supplier.jsp"><i class="fa fa-users"></i>Supplier</a></li>
@@ -108,13 +109,14 @@
                             </a>
                             <ul id="employeetab" class="collapse list-unstyled ">
                                 <li><a href="attendance.jsp">Attendance</a></li>
+                                <li><a href="salary.jsp">Salary Structure</a></li>
                                 <li><a href="employee.jsp">Employee</a></li>
                             </ul></li>
 
 
 
 
-
+                        <li><a href="user.jsp"><i class="fa fa-cab"></i>User Management</a></li>
                         <li><a href="logout.jsp"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                 </nav>
@@ -138,45 +140,44 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
-                                            <h3 class="h4">Invoice</h3>
+                                            <h3 class="h4">New Invoice</h3>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form-horizontal">
+                                            <form class="form-horizontal"  id="forma">
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
-                                                        <input id="invoice_id" type="hidden"	value="0" class="form-control form-control-warning">
+                                                        <input id="invoice_details_id" type="hidden"	value="0" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Customer</label>
                                                     <div class="col-sm-9">
-                                                        <select id="customer_id" class="form-control form-control-warning">
-                                                            
+                                                        <input id="invoice_id_i" type="hidden"	value="0" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">Item</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="item_dump" type="hidden"	value="0" class="form-control form-control-warning">
+                                                        <select id="item_registration_id" class="form-control form-control-warning">
+
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Loyalty Points</label>
+                                                    <label class="col-sm-3 form-control-label">Quantity</label>
                                                     <div class="col-sm-9">
-                                                        <input id="loyalty_points" type="number"	placeholder="loyalty points" class="form-control form-control-warning">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Total</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="total" type="number"	placeholder="total" class="form-control form-control-warning">
+                                                        <input id="qty" type="text" onkeypress="validateNumber()"	placeholder="qty" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
-                                                        <input id="date_time" type="hidden"	value="date time" class="form-control form-control-warning">
+                                                        <input id="date_time_i" type="hidden"	value="2020" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-9 offset-sm-3">
-                                                        <input onclick="save()" type="button" value="Save" class="btn btn-primary">
-                                                        <input onclick="update()" type="button" value="Update" class="btn btn-primary">
-                                                        <input onclick="delet()" type="button" value="Delete" class="btn btn-primary">
+                                                        <input onclick="save_invoice_details()" type="button" value="Add" class="btn btn-primary">
+                                                        <input onclick="delet_invoice_details()" type="button" value="Remove" class="btn btn-danger">
                                                         <input type="reset" value="Reset" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -192,14 +193,99 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
+                                                <table class="table table-hover" id="cart_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Item ID</th>
+                                                            <th>Quantity</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="forms">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h3 class="h4">invoice</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <form class="form-horizontal"  id="form">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-9">
+                                                        <input id="invoice_id" type="hidden"	value="0" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">Customer</label>
+                                                    <div class="col-sm-9">
+                                                        <select id="customer_id" class="form-control form-control-warning">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">Total</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="total" type="text" onkeypress="validateNumber()"	placeholder="total" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">Offer Amount</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="offer_amount" type="text" onkeypress="validateNumber()"	placeholder="offer amount" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 form-control-label">Status</label>
+                                                    <div class="col-sm-9">
+                                                        <input id="status" type="text"	placeholder="status" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-9">
+                                                        <input id="date_time" type="hidden"	value="2020" class="form-control form-control-warning">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-9 offset-sm-3">
+                                                        <input onclick="save()" type="button" value="Save" class="btn btn-primary">
+                                                        <input onclick="update()" type="button" value="Update" class="btn btn-primary">
+                                                        <input onclick="delet()" type="button" value="Delete" class="btn btn-primary">
+                                                        <input onclick="generateReport()" type="button" value="Report" class="btn btn-secondary">
+                                                        <input type="reset" value="Reset" class="btn btn-primary">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="card" id="report">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h3 class="h4">History</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
                                                 <table class="table table-hover" id="table">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
                                                             <th>invoice id</th>
                                                             <th>customer id</th>
-                                                            <th>loyalty points</th>
                                                             <th>total</th>
+                                                            <th>offer amount</th>
+                                                            <th>status</th>
                                                             <th>date time</th>
                                                         </tr>
                                                     </thead>
@@ -208,6 +294,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </section>
@@ -242,11 +330,37 @@
         <!-- Main File-->
         <script src="js/front.js"></script>
 
+        <script type="text/javascript">
+                                                            function Export() {
+                                                                alert("called");
+                                                                html2canvas(document.getElementById('report'), {
+                                                                    onrendered: function (canvas) {
+                                                                        var data = canvas.toDataURL();
+                                                                        var docDefinition = {
+                                                                            content: [{
 
-        <script src="ajax/ajax.js"></script>
-        <script src="sweetalert/sw.js"></script>
-        <script src="ajax/jquery.3.2.1.min.js"></script>
-        <script src="ajax/InvoiceJS.js" type="text/javascript"></script>
-        <script src="ajax/Validations.js" type="text/javascript"></script>
+                                                                                    image: data,
+                                                                                    width: 500
+                                                                                }]
+                                                                        };
+                                                                        pdfMake.createPdf(docDefinition).download("Report.pdf");
+                                                                    }
+                                                                });
+                                                            }
+                                                            $(document).ready(function () {
+                                                                load_invoice_details();
+                                                                $("#search_table").on("keyup", function () {
+                                                                    var value = $(this).val().toLowerCase();
+                                                                    $("#table tr").filter(function () {
+                                                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                    });
+                                                                });
+                                                            });
+        </script>
+        <script src="Ajax/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="Ajax/ajax.js" type="text/javascript"></script>
+        <script src="Ajax/InvoiceJS.js" type="text/javascript"></script>
+        <script src="Ajax/Invoice_detailsJS.js" type="text/javascript"></script>
+        <script src="Ajax/Validations.js" type="text/javascript"></script>
     </body>
 </html>

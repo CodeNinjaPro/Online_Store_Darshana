@@ -1,37 +1,34 @@
-
 selectedRowToInput();
 function selectedRowToInput() {
     var table = document.getElementById('table'), rIndex;
     for (var i = 1; i < table.rows.length; i++) {
         table.rows[i].onclick = function () {
             rIndex = this.rowIndex;
-            document.getElementById("delivery_id").value = this.cells[1].textContent;
-            document.getElementById("invoice_id").value = this.cells[2].textContent;
-            document.getElementById("address").value = this.cells[3].textContent;
-            document.getElementById("status").value = this.cells[4].textContent;
-            document.getElementById("driver_contact").value = this.cells[5].textContent;
+            document.getElementById("salary_shedule_id").value = this.cells[1].textContent;
+            document.getElementById("emp_id").value = this.cells[2].textContent;
+            document.getElementById("basic_salary").value = this.cells[3].textContent;
+            document.getElementById("ot_rate").value = this.cells[4].textContent;
+            document.getElementById("bonus").value = this.cells[5].textContent;
             document.getElementById("date_time").value = this.cells[6].textContent;
         };
     }
 }
 
 function save() {
-    var delivery_id = $('#delivery_id').val();
-    var invoice_id = $('#invoice_id').val();
-    var address = $('#address').val();
-    var status = $('#status').val();
-    var driver_contact = $('#driver_contact').val();
+    var salary_shedule_id = $('#salary_shedule_id').val();
+    var emp_id = $('#emp_id').val();
+    var basic_salary = $('#basic_salary').val();
+    var ot_rate = $('#ot_rate').val();
+    var bonus = $('#bonus').val();
     var date_time = $('#date_time').val();
     var action = "insert";
-    if (delivery_id === "" || invoice_id === "" || address === "" || status === "" || driver_contact === "" || date_time === "") {
+    if (salary_shedule_id === "" || emp_id === "" || basic_salary === "" || ot_rate === "" || bonus === "" || date_time === "") {
         alert("Please Enter All Details")
-    } else if (contactValidation2()) {
-
     } else {
         $.ajax({
-            url: 'DeliveryServlet',
+            url: 'Salary_sheduleServlet',
             method: 'POST',
-            data: {action: action, delivery_id: delivery_id, invoice_id: invoice_id, address: address, status: status, driver_contact: driver_contact, date_time: date_time},
+            data: {action: action, salary_shedule_id: salary_shedule_id, emp_id: emp_id, basic_salary: basic_salary, ot_rate: ot_rate, bonus: bonus, date_time: date_time},
             success: function (resultText) {
                 alert(resultText);
                 $("#table").find("tr:gt(0)").remove();
@@ -45,25 +42,23 @@ function save() {
 }
 
 function update() {
-    var delivery_id = $('#delivery_id').val();
-    var invoice_id = $('#invoice_id').val();
-    var address = $('#address').val();
-    var status = $('#status').val();
-    var driver_contact = $('#driver_contact').val();
+    var salary_shedule_id = $('#salary_shedule_id').val();
+    var emp_id = $('#emp_id').val();
+    var basic_salary = $('#basic_salary').val();
+    var ot_rate = $('#ot_rate').val();
+    var bonus = $('#bonus').val();
     var date_time = $('#date_time').val();
     var action = "update";
-    delivery_id = parseInt(delivery_id);
-    if (delivery_id === 0) {
+    salary_shedule_id = parseInt(salary_shedule_id);
+    if (salary_shedule_id === 0) {
         alert("Please Select to Update")
-    } else if (delivery_id === "" || invoice_id === "" || address === "" || status === "" || driver_contact === "" || date_time === "") {
+    } else if (salary_shedule_id === "" || emp_id === "" || basic_salary === "" || ot_rate === "" || bonus === "" || date_time === "") {
         alert("Please Enter All Details")
-    } else if (contactValidation2()) {
-
     } else {
         $.ajax({
-            url: 'DeliveryServlet',
+            url: 'Salary_sheduleServlet',
             method: 'POST',
-            data: {action: action, delivery_id: delivery_id, invoice_id: invoice_id, address: address, status: status, driver_contact: driver_contact, date_time: date_time},
+            data: {action: action, salary_shedule_id: salary_shedule_id, emp_id: emp_id, basic_salary: basic_salary, ot_rate: ot_rate, bonus: bonus, date_time: date_time},
             success: function (resultText) {
                 alert(resultText);
                 $("#table").find("tr:gt(0)").remove();
@@ -77,18 +72,18 @@ function update() {
 }
 
 function delet() {
-    var delivery_id = $('#delivery_id').val();
+    var salary_shedule_id = $('#salary_shedule_id').val();
     var action = "delete";
-    delivery_id = parseInt(delivery_id);
-    if (delivery_id === 0) {
+    salary_shedule_id = parseInt(salary_shedule_id);
+    if (salary_shedule_id === 0) {
         alert("Please Select to Update")
     } else {
         var r = confirm("Are you Sure?");
         if (r == true) {
             $.ajax({
-                url: 'DeliveryServlet',
+                url: 'Salary_sheduleServlet',
                 method: 'POST',
-                data: {action: action, delivery_id: delivery_id},
+                data: {action: action, salary_shedule_id: salary_shedule_id},
                 success: function (resultText) {
                     $("#table").find("tr:gt(0)").remove();
                     load();
@@ -106,8 +101,8 @@ function delet() {
 
 function load() {
     var table = document.getElementById('table');
-    var dropdown1 = document.getElementById('invoice_id');
-    $('#invoice_id')
+    var dropdown1 = document.getElementById('emp_id');
+    $('#emp_id')
             .find('option')
             .remove()
             .end()
@@ -115,11 +110,10 @@ function load() {
 
     var action = "serch";
     $.ajax({
-        url: 'InvoiceServlet',
+        url: 'EmployeeServlet',
         method: 'POST',
         data: {action: action},
         success: function (resultText) {
-
 
             resultText = resultText.replace("[", "");
             resultText = resultText.replace("]", "");
@@ -137,7 +131,7 @@ function load() {
                 for (i = 0; i < step1.length; ++i) {
                     step2 = step1[i].split("_");
                     var option = document.createElement("option");
-                    option.text = step2[0];
+                    option.text = step2[1];
                     option.value = step2[0];
                     dropdown1.add(option);
 
@@ -153,7 +147,7 @@ function load() {
     });
     var action = "serch";
     $.ajax({
-        url: 'DeliveryServlet',
+        url: 'Salary_sheduleServlet',
         method: 'POST',
         data: {action: action},
         success: function (resultText) {
@@ -196,14 +190,18 @@ function load() {
     document.getElementById("form").reset();
 }
 
-//contact number validation
-function contactValidation2() {
-    var contactNo = $('#driver_contact').val();
-    if (contactNo.length === 10) {
-        return false;
-    } else {
-        alert("Invalid Contact Number!");
-        document.getElementById("driver_contact").select();
-        return true;
-    }
+function generateReport() {
+    var action = "report";
+    $.ajax({
+        url: 'Salary_sheduleServlet',
+        method: 'POST',
+        data: {action: action},
+        success: function (resultText) {
+            alert(resultText);
+            window.open('http://localhost/Reports/report.pdf', '_blank');
+        },
+        error: function (jqXHR, exception) {
+            alert("Fail Ajax")
+        }
+    });
 }

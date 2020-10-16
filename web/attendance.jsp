@@ -99,6 +99,7 @@
 
                         <li><a href="invoice.jsp"><i class="fa fa-file-text-o"></i>Invoice</a></li>
                         <li><a href="customer.jsp"><i class="fa fa-user-o"></i>Customer</a></li>
+                        <li><a href="item.jsp"><i class="fa fa-cube"></i>Item</a></li>
                         <li><a href="stock.jsp"><i class="fa fa-cubes"></i>Stock</a></li>
                         <li><a href="grn.jsp"><i class="fa fa-file-text"></i>GRN</a></li>
                         <li><a href="supplier.jsp"><i class="fa fa-users"></i>Supplier</a></li>
@@ -108,13 +109,14 @@
                             </a>
                             <ul id="employeetab" class="collapse list-unstyled show ">
                                 <li class="active"><a href="attendance.jsp">Attendance</a></li>
+                                <li><a href="salary.jsp">Salary Structure</a></li>
                                 <li><a href="employee.jsp">Employee</a></li>
                             </ul></li>
 
 
 
 
-
+                        <li><a href="user.jsp"><i class="fa fa-cab"></i>User Management</a></li>
                         <li><a href="logout.jsp"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                 </nav>
@@ -138,19 +140,19 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
-                                            <h3 class="h4">attedance</h3>
+                                            <h3 class="h4">attendance</h3>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form-horizontal">
+                                            <form class="form-horizontal" id="form">
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
                                                         <input id="attendance_id" type="hidden"	value="0" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Employee</label>
+                                                    <label class="col-sm-3 form-control-label">EMP ID</label>
                                                     <div class="col-sm-9">
-                                                        <select id="employee_id" class="form-control form-control-warning">
+                                                        <select id="emp_id" class="form-control form-control-warning">
 
                                                         </select>
                                                     </div>
@@ -177,30 +179,24 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 form-control-label">No of Days</label>
                                                     <div class="col-sm-9">
-                                                        <input id="no_of_days" type="number"	placeholder="no of days" class="form-control form-control-warning">
+                                                        <input id="no_of_days" type="text" onkeypress="validateNumber()" placeholder="no of days" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Over Time Hours</label>
+                                                    <label class="col-sm-3 form-control-label">Over Time hrs</label>
                                                     <div class="col-sm-9">
-                                                        <input id="no_of_ot" type="number"	placeholder="no of ot" class="form-control form-control-warning">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Bonus</label>
-                                                    <div class="col-sm-9">
-                                                        <input id="bonus" type="number"	placeholder="bonus" class="form-control form-control-warning">
+                                                        <input id="no_of_ot" type="text" onkeypress="validateNumber()" placeholder="no of ot" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 form-control-label">Advance</label>
                                                     <div class="col-sm-9">
-                                                        <input id="advance" type="number"	placeholder="advance" class="form-control form-control-warning">
+                                                        <input id="advance" type="text" onkeypress="validateNumber()" placeholder="advance" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
-                                                        <input id="date_time" type="hidden"	value="date time" class="form-control form-control-warning">
+                                                        <input id="date_time" type="hidden"	value="2020" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -208,6 +204,7 @@
                                                         <input onclick="save()" type="button" value="Save" class="btn btn-primary">
                                                         <input onclick="update()" type="button" value="Update" class="btn btn-primary">
                                                         <input onclick="delet()" type="button" value="Delete" class="btn btn-primary">
+                                                        <input onclick="generateReport()" type="button" value="Report" class="btn btn-secondary">
                                                         <input type="reset" value="Reset" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -217,7 +214,7 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <div class="card">
+                                    <div class="card" id="report">
                                         <div class="card-header d-flex align-items-center">
                                             <h3 class="h4">History</h3>
                                         </div>
@@ -228,11 +225,10 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th>attendance id</th>
-                                                            <th>Employee id</th>
+                                                            <th>emp id</th>
                                                             <th>month</th>
                                                             <th>no of days</th>
                                                             <th>no of ot</th>
-                                                            <th>bonus</th>
                                                             <th>advance</th>
                                                             <th>date time</th>
                                                         </tr>
@@ -278,10 +274,35 @@
         <!-- Main File-->
         <script src="js/front.js"></script>
 
+        <script type="text/javascript">
+                                                            function Export() {
+                                                                alert("called");
+                                                                html2canvas(document.getElementById('report'), {
+                                                                    onrendered: function (canvas) {
+                                                                        var data = canvas.toDataURL();
+                                                                        var docDefinition = {
+                                                                            content: [{
 
-        <script src="ajax/ajax.js"></script>
-        <script src="sweetalert/sw.js"></script>
-        <script src="ajax/jquery.3.2.1.min.js"></script>
-        <script src="ajax/AttedanceJS.js" type="text/javascript"></script>
+                                                                                    image: data,
+                                                                                    width: 500
+                                                                                }]
+                                                                        };
+                                                                        pdfMake.createPdf(docDefinition).download("Report.pdf");
+                                                                    }
+                                                                });
+                                                            }
+                                                            $(document).ready(function () {
+                                                                $("#search_table").on("keyup", function () {
+                                                                    var value = $(this).val().toLowerCase();
+                                                                    $("#table tr").filter(function () {
+                                                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                    });
+                                                                });
+                                                            });
+        </script>
+        <script src="Ajax/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="Ajax/ajax.js" type="text/javascript"></script>
+        <script src="Ajax/AttendanceJS.js" type="text/javascript"></script>
+        <script src="Ajax/Validations.js" type="text/javascript"></script>
     </body>
 </html>

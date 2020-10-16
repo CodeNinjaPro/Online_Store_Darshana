@@ -33,8 +33,7 @@ public class LoginController {
         ResultSet rs = con.srh("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'");
         if (rs.next()) {
 
-            user.setUser_id(rs.getInt(1));
-            user.setFull_name(rs.getString(2));
+            user.setUser_id(rs.getInt(2));
             user.setUser_type(rs.getString(3));
         }
 

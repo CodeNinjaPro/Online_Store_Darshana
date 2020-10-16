@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Controllers.CustomerController;
+import Controllers.EmployeeController;
 import Controllers.LoginController;
 import Models.User;
 import java.io.IOException;
@@ -45,16 +47,23 @@ public class LoginServlet extends HttpServlet {
             User user = LoginController.getInstance().Login(username, password);
 
             if (user.getUser_id() > 0) {
-                
+
                 HttpSession session = request.getSession();
                 session.setAttribute("userid", user.getUser_id());
-                session.setAttribute("userfullname", user.getFull_name());
                 session.setAttribute("usertype", user.getUser_type());
-                user.setUser_id(0);
-                response.getWriter().println(1);
+
+                if (user.getUser_type().equals("Admin")) {
+                    session.setAttribute("userfullname", EmployeeController.getInstance().getUserFullName(user.getEmp_id()));
+
+                    response.sendRedirect("user.jsp");
+                } else {
+                    session.setAttribute("userfullname", CustomerController.getInstance().getUserFullName(user.getEmp_id()));
+                    response.sendRedirect("site/index.jsp");
+
+                }
+
             } else {
-                user.setUser_id(0);
-                response.getWriter().println(0);
+                response.sendRedirect("login.jsp");
             }
 
         }

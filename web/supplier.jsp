@@ -99,6 +99,7 @@
 
                         <li><a href="invoice.jsp"><i class="fa fa-file-text-o"></i>Invoice</a></li>
                         <li><a href="customer.jsp"><i class="fa fa-user-o"></i>Customer</a></li>
+                        <li><a href="item.jsp"><i class="fa fa-cube"></i>Item</a></li>
                         <li><a href="stock.jsp"><i class="fa fa-cubes"></i>Stock</a></li>
                         <li><a href="grn.jsp"><i class="fa fa-file-text"></i>GRN</a></li>
                         <li class="active"><a href="supplier.jsp"><i class="fa fa-users"></i>Supplier</a></li>
@@ -108,13 +109,14 @@
                             </a>
                             <ul id="employeetab" class="collapse list-unstyled ">
                                 <li><a href="attendance.jsp">Attendance</a></li>
+                                <li><a href="salary.jsp">Salary Structure</a></li>
                                 <li><a href="employee.jsp">Employee</a></li>
                             </ul></li>
 
 
 
 
-
+                        <li><a href="user.jsp"><i class="fa fa-cab"></i>User Management</a></li>
                         <li><a href="logout.jsp"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                 </nav>
@@ -141,7 +143,7 @@
                                             <h3 class="h4">supplier</h3>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form-horizontal">
+                                            <form class="form-horizontal" id="form">
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
                                                         <input id="supplier_id" type="hidden"	value="0" class="form-control form-control-warning">
@@ -150,7 +152,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 form-control-label">Name</label>
                                                     <div class="col-sm-9">
-                                                        <input id="name" type="text" onkeypress="validateName()" placeholder="name" class="form-control form-control-warning">
+                                                        <input id="name" type="text" onkeypress="validateName()"	placeholder="name" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -166,14 +168,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 form-control-label">Contact</label>
+                                                    <label class="col-sm-3 form-control-label">Status</label>
                                                     <div class="col-sm-9">
-                                                        <input id="contact" type="text" onkeypress="onClickValidationContactNumber()" placeholder="contact" class="form-control form-control-warning">
+                                                        <input id="status" type="text"	placeholder="status" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-9">
-                                                        <input id="date_time" type="hidden"	value="date time" class="form-control form-control-warning">
+                                                        <input id="date_time" type="hidden"	value="2020" class="form-control form-control-warning">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -181,7 +183,7 @@
                                                         <input onclick="save()" type="button" value="Save" class="btn btn-primary">
                                                         <input onclick="update()" type="button" value="Update" class="btn btn-primary">
                                                         <input onclick="delet()" type="button" value="Delete" class="btn btn-primary">
-                                                        <input onclick="#" type="button" value="Report" class="btn btn-primary">
+                                                        <input onclick="generateReport()" type="button" value="Report" class="btn btn-secondary">
                                                         <input type="reset" value="Reset" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -191,7 +193,7 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <div class="card">
+                                    <div class="card" id="report">
                                         <div class="card-header d-flex align-items-center">
                                             <h3 class="h4">History</h3>
                                         </div>
@@ -205,7 +207,7 @@
                                                             <th>name</th>
                                                             <th>address</th>
                                                             <th>email</th>
-                                                            <th>contact</th>
+                                                            <th>status</th>
                                                             <th>date time</th>
                                                         </tr>
                                                     </thead>
@@ -214,7 +216,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </section>
@@ -252,10 +253,35 @@
         <script src="js/front.js"></script>
 
 
-        <script src="ajax/ajax.js"></script>
-        <script src="sweetalert/sw.js"></script>
-        <script src="ajax/jquery.3.2.1.min.js"></script>
-        <script src="ajax/SupplierJS.js" type="text/javascript"></script>
-        <script src="ajax/Validations.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                                                            function Export() {
+                                                                alert("called");
+                                                                html2canvas(document.getElementById('report'), {
+                                                                    onrendered: function (canvas) {
+                                                                        var data = canvas.toDataURL();
+                                                                        var docDefinition = {
+                                                                            content: [{
+
+                                                                                    image: data,
+                                                                                    width: 500
+                                                                                }]
+                                                                        };
+                                                                        pdfMake.createPdf(docDefinition).download("Report.pdf");
+                                                                    }
+                                                                });
+                                                            }
+                                                            $(document).ready(function () {
+                                                                $("#search_table").on("keyup", function () {
+                                                                    var value = $(this).val().toLowerCase();
+                                                                    $("#table tr").filter(function () {
+                                                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                    });
+                                                                });
+                                                            });
+        </script>
+        <script src="Ajax/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="Ajax/ajax.js" type="text/javascript"></script>
+        <script src="Ajax/SupplierJS.js" type="text/javascript"></script>
+        <script src="Ajax/Validations.js" type="text/javascript"></script>
     </body>
 </html>

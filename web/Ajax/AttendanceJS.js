@@ -5,34 +5,32 @@ function selectedRowToInput() {
         table.rows[i].onclick = function () {
             rIndex = this.rowIndex;
             document.getElementById("attendance_id").value = this.cells[1].textContent;
-            document.getElementById("employee_id").value = this.cells[2].textContent;
+            document.getElementById("emp_id").value = this.cells[2].textContent;
             document.getElementById("month").value = this.cells[3].textContent;
             document.getElementById("no_of_days").value = this.cells[4].textContent;
             document.getElementById("no_of_ot").value = this.cells[5].textContent;
-            document.getElementById("bonus").value = this.cells[6].textContent;
-            document.getElementById("advance").value = this.cells[7].textContent;
-            document.getElementById("date_time").value = this.cells[8].textContent;
+            document.getElementById("advance").value = this.cells[6].textContent;
+            document.getElementById("date_time").value = this.cells[7].textContent;
         };
     }
 }
 
 function save() {
     var attendance_id = $('#attendance_id').val();
-    var employee_id = $('#employee_id').val();
+    var emp_id = $('#emp_id').val();
     var month = $('#month').val();
     var no_of_days = $('#no_of_days').val();
     var no_of_ot = $('#no_of_ot').val();
-    var bonus = $('#bonus').val();
     var advance = $('#advance').val();
     var date_time = $('#date_time').val();
     var action = "insert";
-    if (employee_id === "" || attendance_id === "" || month === "" || no_of_days === "" || no_of_ot === "" || bonus === "" || advance === "" || date_time === "") {
+    if (attendance_id === "" || emp_id === "" || month === "" || no_of_days === "" || no_of_ot === "" || advance === "" || date_time === "") {
         alert("Please Enter All Details")
     } else {
         $.ajax({
-            url: 'AttedanceServlet',
+            url: 'AttendanceServlet',
             method: 'POST',
-            data: {action: action, attendance_id: attendance_id, employee_id: employee_id, month: month, no_of_days: no_of_days, no_of_ot: no_of_ot, bonus: bonus, advance: advance, date_time: date_time},
+            data: {action: action, attendance_id: attendance_id, emp_id: emp_id, month: month, no_of_days: no_of_days, no_of_ot: no_of_ot, advance: advance, date_time: date_time},
             success: function (resultText) {
                 alert(resultText);
                 $("#table").find("tr:gt(0)").remove();
@@ -47,24 +45,23 @@ function save() {
 
 function update() {
     var attendance_id = $('#attendance_id').val();
-    var employee_id = $('#employee_id').val();
+    var emp_id = $('#emp_id').val();
     var month = $('#month').val();
     var no_of_days = $('#no_of_days').val();
     var no_of_ot = $('#no_of_ot').val();
-    var bonus = $('#bonus').val();
     var advance = $('#advance').val();
     var date_time = $('#date_time').val();
     var action = "update";
     attendance_id = parseInt(attendance_id);
     if (attendance_id === 0) {
         alert("Please Select to Update")
-    } else if (attendance_id === "" || month === "" || no_of_days === "" || no_of_ot === "" || bonus === "" || advance === "" || date_time === "") {
+    } else if (attendance_id === "" || emp_id === "" || month === "" || no_of_days === "" || no_of_ot === "" || advance === "" || date_time === "") {
         alert("Please Enter All Details")
     } else {
         $.ajax({
-            url: 'AttedanceServlet',
+            url: 'AttendanceServlet',
             method: 'POST',
-            data: {action: action, attendance_id: attendance_id, employee_id: employee_id, month: month, no_of_days: no_of_days, no_of_ot: no_of_ot, bonus: bonus, advance: advance, date_time: date_time},
+            data: {action: action, attendance_id: attendance_id, emp_id: emp_id, month: month, no_of_days: no_of_days, no_of_ot: no_of_ot, advance: advance, date_time: date_time},
             success: function (resultText) {
                 alert(resultText);
                 $("#table").find("tr:gt(0)").remove();
@@ -87,7 +84,7 @@ function delet() {
         var r = confirm("Are you Sure?");
         if (r == true) {
             $.ajax({
-                url: 'AttedanceServlet',
+                url: 'AttendanceServlet',
                 method: 'POST',
                 data: {action: action, attendance_id: attendance_id},
                 success: function (resultText) {
@@ -107,8 +104,8 @@ function delet() {
 
 function load() {
     var table = document.getElementById('table');
-    var dropdown1 = document.getElementById('employee_id');
-    $('#employee_id')
+    var dropdown1 = document.getElementById('emp_id');
+    $('#emp_id')
             .find('option')
             .remove()
             .end()
@@ -120,7 +117,6 @@ function load() {
         method: 'POST',
         data: {action: action},
         success: function (resultText) {
-
 
             resultText = resultText.replace("[", "");
             resultText = resultText.replace("]", "");
@@ -154,7 +150,7 @@ function load() {
     });
     var action = "serch";
     $.ajax({
-        url: 'AttedanceServlet',
+        url: 'AttendanceServlet',
         method: 'POST',
         data: {action: action},
         success: function (resultText) {
@@ -197,4 +193,20 @@ function load() {
         }
     });
     document.getElementById("form").reset();
+}
+
+function generateReport() {
+    var action = "report";
+    $.ajax({
+        url: 'AttendanceServlet',
+        method: 'POST',
+        data: {action: action},
+        success: function (resultText) {
+            alert(resultText);
+            window.open('http://localhost/Reports/report.pdf', '_blank');
+        },
+        error: function (jqXHR, exception) {
+            alert("Fail Ajax")
+        }
+    });
 }
